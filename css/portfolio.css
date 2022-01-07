@@ -1,0 +1,8 @@
+header{
+    background-image: url(https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fimages.pexels.com%2Fphotos%2F2092064%2Fpexels-photo-2092064.jpeg%3Fauto%3Dcompress%26cs%3Dtinysrgb%26fit%3Dcrop%26h%3D627%26w%3D1200&f=1&nofb=1);
+    background-size: cover;
+}
+.fit-image{
+    width: 100%;
+    object-fit: cover;
+}

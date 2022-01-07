@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Remmoskv</title>
+    <!-- Icon-->
+    <link rel="icon" type="image/x-icon" href="assets/icon.png" />
+    <!-- Bootstrap icons-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="css/styles.css" rel="stylesheet" />
+    <link href="css/main.css" rel="stylesheet">
+
+    <script src='https://www.google.com/recaptcha/api.js'></script>
+</head>
+
+<body>
+    <!-- Responsive navbar-->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark position-sticky sticky-top">
+        <div class="container px-5">
+            <div>
+                <a class="" href="mailto:remmoskv@yandex.ru">remmoskv@yandex.ru</a>
+                <img src="assets/icon.png" alt="ico" width="50">
+            </div>
+            <a class="navbar-brand" href="main.html">Remmoskv</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link active disabled" aria-current="page" href="">Главная</a>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="portfolio.html">Ремонт</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">О нас</a></li>
+                    <li class="nav-item"><a class="nav-link" href="faq.html">FAQ</a></li>
+                    <li class="nav-item"><a class="nav-link" href="tel:+79154496350">+7 (915) 449-63-50</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- Header-->
+    <header class="bg-dark bg-image py-5">
+        <div class="container px-5">
+            <div class="row gx-5 justify-content-center">
+                <!-- Alert Messages -->
+                <div class="text-center">
+                    <div th:if="${orderMessage != null}" th:text="${orderMessage}" class="alert-info">
+                        Order Message
+                    </div>
+                </div>
+                <div class="text-center my-5 row">
+                    <div class="col-6">
+                        <h1 class="display-5 fw-bolder text-white mb-2">Ремонт в вашей квартире, доме, офисе</h1>
+                        <p class="lead text-white mb-6">Фиксированные цены<br>
+                            Отсутствие внеплановых расходов<br>
+                            Осуществляем деятельность с 2015 года</p>
+                    </div>
+                    <form class="col-6" action="/order" method="post">
+                        <!-- Name input-->
+                        <div class="form-floating mb-3">
+                            <input th:field="${emailForm.name}" class="form-control" id="main-name" type="text" placeholder="Полное Имя" required />
+                            <label for="main-name">Полное Имя</label>
+                        </div>
+                        <!-- Email address input-->
+                        <div class="form-floating mb-3">
+                            <input th:field="${emailForm.email}" class="form-control" id="main-email" type="email" placeholder="Електронная почта"
+                                pattern="[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+" required />
+                            <label for="email">Ваша Електронная Почта</label>
+                        </div>
+                        <!-- Phone number input-->
+                        <div class="form-floating mb-3">
+                            <input th:field="${emailForm.phoneNumber}" class="form-control" id="main-phone" type="tel" placeholder="номер телефона"
+                                pattern="^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$" required />
+                            <label for="main-phone">Ваш номер телефона</label>
+                        </div>
+                        <!-- Message input-->
+                        <div class="form-floating mb-3">
+                            <textarea th:field="${emailForm.order}" class="form-control" id="main-message" type="text" placeholder="Ваш заказ"
+                                style="height: 10rem" required></textarea>
+                            <label for="message">Заказ</label>
+                        </div>
+                        <!-- Captcha -->
+                        <div class="form-floating mb-3">
+                            <div th:if="${captchaErrMessage != null}" th:text="${captchaErrMessage}" class="alert-danger">
+                                Captcha Error
+                            </div>
+                            <div class="g-recaptcha"
+                                 data-sitekey="6Lfu1PEdAAAAALNmePkwByZMyk4HKjrRlzmtgooD">
+                            </div>
+                        </div>
+                        <!-- Submit Button-->
+                        <div class="d-grid"><button class="btn btn-primary btn-lg"
+                                type="submit">Отправить</button></div>
+                    </form>
+                </div>
+                <div class="d-grid gap-3 d-sm-flex justify-content-sm-center m-4">
+                    <a class="btn btn-primary btn-lg px-4 me-sm-3" href="#features">Наши качества</a>
+                    <a class="btn btn-outline-light btn-lg px-4" href="#services">Наши Услуги</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Price Table-->
+    <div class="container py-5">
+    </div>
+
+    <!-- Features section-->
+    <section class="py-5 border-bottom" id="features">
+        <div class="container px-5 my-5">
+            <div class="row gx-5">
+                <div class="col-lg-4 mb-5 mb-lg-0">
+                    <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3"><i
+                            class="bi bi-briefcase"></i></div>
+                    <h2 class="h4 fw-bolder">ЮРИДИЧЕСКАЯ ЧИСТОТА</h2>
+                    <p>Если подрядчик не один, сложно искать виноватых. Мы несем полную юридическую ответственность, что
+                        полностью исключает риски!</p>
+                </div>
+                <div class="col-lg-4 mb-5 mb-lg-0">
+                    <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3"><i class="bi bi-wallet2"></i>
+                    </div>
+                    <h2 class="h4 fw-bolder">РАБОТАЕМ БЕЗ ПРЕДОПЛАТЫ</h2>
+                    <p>Мы не требуем от клиентов предоплат и авансов. Оплата производится только по факту выполненных
+                        работ!</p>
+                </div>
+                <div class="col-lg-4 mb-5 mb-lg-0">
+                    <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3"><i class="bi bi-hammer"></i>
+                    </div>
+                    <h2 class="h4 fw-bolder">ОШИБКИ В РЕМОНТЕ</h2>
+                    <p>Перед тем как приступить к работе, наши специалисты делают точные замеры и расчеты. А это в свою
+                        очередь исключает ошибки и переделки на всем этапе!</p>
+                </div>
+                <div class="col-lg-4 mb-5 mb-lg-0">
+                    <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3"><i
+                            class="bi bi-emoji-smile"></i></div>
+                    <h2 class="h4 fw-bolder">ОТНОШЕНИЯ С ПОДРЯДЧИКОМ</h2>
+                    <p>Прежде чем плодотворно работать с заказчиком, необходимо установить добрые и честные отношения.
+                        Только в этом случае ремонт будет проходить без трудностей и разладов. Наш приоритет, это
+                        порядочное отношение как с Заказчиком, так и нашими сотрудниками. Мы в этом убедились за 15 лет!
+                    </p>
+                </div>
+                <div class="col-lg-4 mb-5 mb-lg-0">
+                    <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3"><i
+                            class="bi bi-cart-check"></i></div>
+                    <h2 class="h4 fw-bolder">КАЧЕСТВЕННЫЕ МАТЕРИАЛЫ</h2>
+                    <p>Мы используем материалы только проверенных производителей. </p>
+                </div>
+                <div class="col-lg-4">
+                    <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3"><i
+                            class="bi bi-check2-square"></i></div>
+                    <h2 class="h4 fw-bolder">ОФИЦИАЛЬНЫЙ ДОГОВОР</h2>
+                    <p>Фиксируем в смете точную цену, срок и все что обещаем!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Pricing section-->
+    <section class="bg-light py-5 border-bottom" id="services">
+        <div class="container px-5 my-5">
+            <div class="text-center mb-5">
+                <h2 class="fw-bolder">Наши услуги</h2>
+                <p class="lead mb-0">Индивидуальные планы</p>
+            </div>
+            <div class="row gx-5 justify-content-center">
+                <table class="table table-bordered border-primary">
+                    <thead class="table-primary">
+                        <tr>
+                            <td>Работы / Тип ремонта</td>
+                            <td>Черновой (от 3 400р)</td>
+                            <td>Косметический (от 2 500р)</td>
+                            <td>Стандартный (от 3 900р)</td>
+                            <td>Капитальный (от 4 900р)</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="table-secondary">
+                            <td colspan="5" class="text-center">Вторичное жилье</td>
+                        </tr>
+                        <tr>
+                            <td>Демонтаж электрики</td>
+                            <td></td>
+                            <td>
+                                <z></z>
+                            </td>
+                            <td>
+                                <z></z>
+                            </td>
+                            <td>
+                                <z></z>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Демонтаж сантехнических коммуникаций</td>
+                            <td>
+                                <z></z>
+                            </td>
+                            <td></td>
+                            <td>
+                                <z></z>
+                            </td>
+                            <td>
+                                <z></z>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Демонтаж перегородок</td>
+                            <td>
+                                <z></z>
+                            </td>
+                            <td></td>
+                            <td></td>
+                            <td>
+                                <z></z>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Демонтаж существующих покрытий</td>
+                            <td></td>
+                            <td>
+                                <z></z>
+                            </td>
+                            <td>
+                                <z></z>
+                            </td>
+                            <td>
+                                <z></z>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Возведение перегородок</td>
+                            <td>
+                                <z></z>
+                            </td>
+                            <td></td>
+                            <td></td>
+                            <td>
+                                <z></z>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Шпатлевка и штукатурка стен</td>
+                            <td>
+                                <z></z>
+                            </td>
+                            <td></td>
+                            <td>
+                                <z></z>
+                            </td>
+                            <td>
+                                <z></z>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Грунтовка стен и пола</td>
+                            <td>
+                                <z></z>
+                            </td>
+                            <td>
+                                <z></z>
+                            </td>
+                            <td>
+                                <z></z>
+                            </td>
+                            <td>
+                                <z></z>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Устройство наливных полов</td>
+                            <td>
+                                <z></z>
+                            </td>
+                            <td></td>
+                            <td></td>
+                            <td>
+                                <z></z>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Штробление стен под электрокабель</td>
+                            <td>
+                                <z></z>
+                            </td>
+                            <td></td>
+                            <td></td>
+                            <td>
+                                <z></z>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Прокладка электрокабеля</td>
+                            <td>
+                                <z></z>
+                            </td>
+                            <td></td>
+                            <td>
+                                <z></z>
+                            </td>
+                            <td>
+                                <z></z>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Разводка труб водоснабжения</td>
+                            <td>
+                                <z></z>
+                            </td>
+                            <td></td>
+                            <td>
+                                <z></z>
+                            </td>
+                            <td>
+                                <z></z>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Монтаж труб канализации</td>
+                            <td>
+                                <z></z>
+                            </td>
+                            <td></td>
+                            <td>
+                                <z></z>
+                            </td>
+                            <td>
+                                <z></z>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Настил линолеума, ковралина</td>
+                            <td></td>
+                            <td>
+                                <z></z>
+                            </td>
+                            <td>
+                                <z></z>
+                            </td>
+                            <td>
+                                <z></z>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Укладка ламината, паркетной доски или плитки</td>
+                            <td></td>
+                            <td></td>
+                            <td>
+                                <z></z>
+                            </td>
+                            <td>
+                                <z></z>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Монтаж плинтусов</td>
+                            <td></td>
+                            <td>
+                                <z></z>
+                            </td>
+                            <td>
+                                <z></z>
+                            </td>
+                            <td>
+                                <z></z>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Оклейка стен обоями</td>
+                            <td></td>
+                            <td>
+                                <z></z>
+                            </td>
+                            <td>
+                                <z></z>
+                            </td>
+                            <td>
+                                <z></z>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Покраска потолка</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>
+                                <z></z>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Покраска пола</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>
+                                <z></z>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Устройство откосов из ПВХ-панелей, сендвич-панелей</td>
+                            <td></td>
+                            <td></td>
+                            <td>
+                                <z></z>
+                            </td>
+                            <td>
+                                <z></z>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Монтаж натяжного потолка</td>
+                            <td></td>
+                            <td>
+                                <z></z>
+                            </td>
+                            <td>
+                                <z></z>
+                            </td>
+                            <td>
+                                <z></z>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Замена карнизов</td>
+                            <td></td>
+                            <td>
+                                <z></z>
+                            </td>
+                            <td>
+                                <z></z>
+                            </td>
+                            <td>
+                                <z></z>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Установка подоконников, отливов</td>
+                            <td></td>
+                            <td></td>
+                            <td>
+                                <z></z>
+                            </td>
+                            <td>
+                                <z></z>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Установка межкомнатных дверей</td>
+                            <td></td>
+                            <td></td>
+                            <td>
+                                <z></z>
+                            </td>
+                            <td>
+                                <z></z>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>
+                                <a class="btn btn-primary btn-lg px-4 me-sm-3" href="#contact-us">Рассчитать</a>
+                            </td>
+                            <td>
+                                <a class="btn btn-primary btn-lg px-4 me-sm-3" href="#contact-us">Рассчитать</a>
+                            </td>
+                            <td>
+                                <a class="btn btn-primary btn-lg px-4 me-sm-3" href="#contact-us">Рассчитать</a>
+                            </td>
+                            <td>
+                                <a class="btn btn-primary btn-lg px-4 me-sm-3" href="#contact-us">Рассчитать</a>
+                            </td>
+                        </tr>
+                        <tr class="table-secondary">
+                            <td colspan="5" class="text-center">Новостройка</td>
+                        </tr>
+                        <tr>
+                            <td>Возведение перегородок</td>
+                            <td>
+                                <z></z>
+                            </td>
+                            <td></td>
+                            <td></td>
+                            <td>
+                                <z></z>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Шпатлевка и штукатурка стен</td>
+                            <td>
+                                <z></z>
+                            </td>
+                            <td></td>
+                            <td></td>
+                            <td>
+                                <z></z>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Грунтовка стен и пола</td>
+                            <td>
+                                <z></z>
+                            </td>
+                            <td></td>
+                            <td></td>
+                            <td>
+                                <z></z>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Устройство наливных полов</td>
+                            <td>
+                                <z></z>
+                            </td>
+                            <td></td>
+                            <td></td>
+                            <td>
+                                <z></z>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Штробление стен под электрокабель</td>
+                            <td>
+                                <z></z>
+                            </td>
+                            <td></td>
+                            <td></td>
+                            <td>
+                                <z></z>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Прокладка электрокабеля</td>
+                            <td>
+                                <z></z>
+                            </td>
+                            <td></td>
+                            <td></td>
+                            <td>
+                                <z></z>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Разводка труб водоснабжения</td>
+                            <td>
+                                <z></z>
+                            </td>
+                            <td></td>
+                            <td></td>
+                            <td>
+                                <z></z>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Монтаж труб канализации</td>
+                            <td>
+                                <z></z>
+                            </td>
+                            <td></td>
+                            <td></td>
+                            <td>
+                                <z></z>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Настил линолеума, ковралина</td>
+                            <td></td>
+                            <td>
+                                <z></z>
+                            </td>
+                            <td>
+                                <z></z>
+                            </td>
+                            <td>
+                                <z></z>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Укладка ламината, паркетной доски или плитки</td>
+                            <td></td>
+                            <td></td>
+                            <td>
+                                <z></z>
+                            </td>
+                            <td>
+                                <z></z>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Монтаж плинтусов</td>
+                            <td></td>
+                            <td>
+                                <z></z>
+                            </td>
+                            <td>
+                                <z></z>
+                            </td>
+                            <td>
+                                <z></z>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Оклейка стен обоями</td>
+                            <td></td>
+                            <td>
+                                <z></z>
+                            </td>
+                            <td>
+                                <z></z>
+                            </td>
+                            <td>
+                                <z></z>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Устройство откосов из ПВХ-панелей, сендвич-панелей</td>
+                            <td></td>
+                            <td>
+                                <z></z>
+                            </td>
+                            <td>
+                                <z></z>
+                            </td>
+                            <td>
+                                <z></z>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Монтаж натяжного потолка</td>
+                            <td></td>
+                            <td>
+                                <z></z>
+                            </td>
+                            <td>
+                                <z></z>
+                            </td>
+                            <td>
+                                <z></z>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Замена карнизов</td>
+                            <td></td>
+                            <td></td>
+                            <td>
+                                <z></z>
+                            </td>
+                            <td>
+                                <z></z>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Установка подоконников, отливов</td>
+                            <td></td>
+                            <td></td>
+                            <td>
+                                <z></z>
+                            </td>
+                            <td>
+                                <z></z>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Установка межкомнатных дверей</td>
+                            <td></td>
+                            <td></td>
+                            <td>
+                                <z></z>
+                            </td>
+                            <td>
+                                <z></z>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>
+                                <a class="btn btn-primary btn-lg px-4 me-sm-3" href="#contact-us">Рассчитать</a>
+                            </td>
+                            <td>
+                                <a class="btn btn-primary btn-lg px-4 me-sm-3" href="#contact-us">Рассчитать</a>
+                            </td>
+                            <td>
+                                <a class="btn btn-primary btn-lg px-4 me-sm-3" href="#contact-us">Рассчитать</a>
+                            </td>
+                            <td>
+                                <a class="btn btn-primary btn-lg px-4 me-sm-3" href="#contact-us">Рассчитать</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact section-->
+    <section class="bg-light py-5" id="contact-us">
+        <div class="container px-5 my-5 px-5">
+            <div class="text-center mb-5">
+                <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3"><i class="bi bi-envelope"></i>
+                </div>
+                <h2 class="fw-bolder">Заинтересовало?</h2>
+                <p class="lead mb-0">Напишите нам индивидуальный заказ и мы вам ответим</p>
+            </div>
+            <div class="row gx-5 justify-content-center">
+                <div class="col-lg-6">
+                    <form id="contactForm" action="/order" method="post">
+                        <!-- Name input-->
+                        <div class="form-floating mb-3">
+                            <input th:field="${emailForm.name}" class="form-control" id="name" type="text" placeholder="Полное Имя" required />
+                            <label for="name">Полное Имя</label>
+                        </div>
+                        <!-- Email address input-->
+                        <div class="form-floating mb-3">
+                            <input th:field="${emailForm.email}" class="form-control" id="email" type="email" placeholder="Електронная почта"
+                                pattern="[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+" required />
+                            <label for="email">Ваша Електронная Почта</label>
+                        </div>
+                        <!-- Phone number input-->
+                        <div class="form-floating mb-3">
+                            <input th:field="${emailForm.phoneNumber}" class="form-control" id="phone" type="tel" placeholder="номер телефона"
+                                pattern="^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$" required />
+                            <label for="phone">Ваш номер телефона</label>
+                        </div>
+                        <!-- Message input-->
+                        <div class="form-floating mb-3">
+                            <textarea th:field="${emailForm.order}" class="form-control" id="message" type="text" placeholder="Ваш заказ"
+                                style="height: 10rem" required></textarea>
+                            <label for="message">Заказ</label>
+                        </div>
+                        <!-- Captcha -->
+                        <div class="form-floating mb-3">
+                            <div th:if="${captchaErrMessage != null}" th:text="${captchaErrMessage}" class="alert-danger">
+                                Captcha Error
+                            </div>
+                            <div class="g-recaptcha"
+                                 data-sitekey="6Lfu1PEdAAAAALNmePkwByZMyk4HKjrRlzmtgooD">
+                            </div>
+                        </div>
+                        <!-- Submit Button-->
+                        <div class="d-grid"><button class="btn btn-primary btn-lg" id="submitButton"
+                                type="submit">Отправить</button></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Footer-->
+    <footer class="py-5 bg-dark">
+        <div class="container px-5">
+            <p class="m-0 text-center text-white">РЕМОНТНО-СТРОИТЕЛЬНАЯ КОМПАНИЯ "REMMOSKV@" © 2015-2021 Г. ВСЕ ПРАВА
+                ЗАЩИЩЕНЫ. КОПИРОВАНИЕ И ИСПОЛЬЗОВАНИЕ ИНФОРМАЦИИ С САЙТА БЕЗ СОГЛАСИЯ ВЛАДЕЛЬЦА ЗАПРЕЩЕНЫ И ПРЕСЛЕДУЕТСЯ
+                ПО ЗАКОНУ.</p>
+        </div>
+    </footer>
+    <!-- Bootstrap core JS-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Core theme JS-->
+    <script src="js/scripts.js"></script>
+</body>
+
+</html>

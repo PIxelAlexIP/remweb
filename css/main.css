@@ -1,0 +1,17 @@
+header{
+    background-image: url('../assets/blurmainwall.jpg');
+    background-size: cover;
+}
+z::before{
+    background-image: url('../assets/tick.png');
+    background-size: 30px 30px;
+    background-position: center center;
+    background-repeat:no-repeat;
+    display: inline-block;
+    height: 30px;
+    width: 30px;
+    content:"";
+}
+nav a{
+    font-size: larger;
+}
