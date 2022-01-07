@@ -3,6 +3,10 @@
 nav a{
   font-size: larger;
 }
+nav a[href="mailto"],
+nav a[href="tel"]{
+  font-size: medium;
+}
 /*!
 * Start Bootstrap - Business Frontpage v5.0.7 (https://startbootstrap.com/template/business-frontpage)
 * Copyright 2013-2021 Start Bootstrap

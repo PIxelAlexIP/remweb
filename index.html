@@ -22,10 +22,10 @@
     <!-- Responsive navbar-->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark position-sticky sticky-top">
         <div class="container px-5">
-            <div>
-                <a class="" href="mailto:remmoskv@yandex.ru">remmoskv@yandex.ru</a>
-                <img src="assets/icon.png" alt="ico" width="50">
-            </div>
+            <img src="assets/icon.png" alt="ico" width="50">
+            <a class="" href="mailto:remmoskv@yandex.ru">remmoskv@yandex.ru</a>
+            <a class="nav-link" href="tel:+79154496350">+7 (915) 449-63-50</a>
+            
             <a class="navbar-brand" href="main.html">Remmoskv</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -37,7 +37,6 @@
                     <li class="nav-item"><a class="nav-link" href="portfolio.html">Ремонт</a></li>
                     <li class="nav-item"><a class="nav-link" href="about.html">О нас</a></li>
                     <li class="nav-item"><a class="nav-link" href="faq.html">FAQ</a></li>
-                    <li class="nav-item"><a class="nav-link" href="tel:+79154496350">+7 (915) 449-63-50</a></li>
                 </ul>
             </div>
         </div>
@@ -46,12 +45,6 @@
     <header class="bg-dark bg-image py-5">
         <div class="container px-5">
             <div class="row gx-5 justify-content-center">
-                <!-- Alert Messages -->
-                <div class="text-center">
-                    <div th:if="${orderMessage != null}" th:text="${orderMessage}" class="alert-info">
-                        Order Message
-                    </div>
-                </div>
                 <div class="text-center my-5 row">
                     <div class="col-6">
                         <h1 class="display-5 fw-bolder text-white mb-2">Ремонт в вашей квартире, доме, офисе</h1>
@@ -82,15 +75,6 @@
                             <textarea th:field="${emailForm.order}" class="form-control" id="main-message" type="text" placeholder="Ваш заказ"
                                 style="height: 10rem" required></textarea>
                             <label for="message">Заказ</label>
-                        </div>
-                        <!-- Captcha -->
-                        <div class="form-floating mb-3">
-                            <div th:if="${captchaErrMessage != null}" th:text="${captchaErrMessage}" class="alert-danger">
-                                Captcha Error
-                            </div>
-                            <div class="g-recaptcha"
-                                 data-sitekey="6Lfu1PEdAAAAALNmePkwByZMyk4HKjrRlzmtgooD">
-                            </div>
                         </div>
                         <!-- Submit Button-->
                         <div class="d-grid"><button class="btn btn-primary btn-lg"
