@@ -5,7 +5,7 @@ nav a{
 }
 nav a[href="mailto"],
 nav a[href="tel"]{
-  font-size: medium;
+  font-size: smaller;
 }
 /*!
 * Start Bootstrap - Business Frontpage v5.0.7 (https://startbootstrap.com/template/business-frontpage)
