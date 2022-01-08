@@ -15,3 +15,18 @@ z::before{
 nav a{
     font-size: larger;
 }
+@media (max-width: 900px){
+    section[id="pricing-table"]{
+        display: none;
+    }
+}
+@media (max-width: 1800px){
+    div.uppercontacts{
+        min-width: max-content;
+    }
+}
+@media (max-width: 1080px){
+    div.spacebetween{
+        display: none;
+    }
+}
