@@ -7,6 +7,19 @@ nav a[href="mailto"],
 nav a[href="tel"]{
   font-size: smaller;
 }
+nav a{
+  font-size: larger;
+}
+@media (max-width: 1800px){
+  div.uppercontacts{
+      min-width: max-content;
+  }
+}
+@media (max-width: 1080px){
+  div.spacebetween{
+      display: none;
+  }
+}
 /*!
 * Start Bootstrap - Business Frontpage v5.0.7 (https://startbootstrap.com/template/business-frontpage)
 * Copyright 2013-2021 Start Bootstrap

@@ -21,12 +21,16 @@
 <body>
     <!-- Responsive navbar-->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark position-sticky sticky-top">
+        <div class="spacebetween">
+            &ThickSpace;&ThickSpace;&ThickSpace;&ThickSpace;
+        </div>
+        <div class="uppercontacts">
+            <img src="assets/icon.png" alt="ico" width="55">&ThickSpace;
+            <a class="navbar-brand" href="index.html">Remmoskv</a>
+            <a class="" style="font-size: 95%;" href="mailto:remmoskv@yandex.ru">remmoskv@yandex.ru</a>&MediumSpace;
+            <a class="text-decoration-none link-light" style="font-size: 95%;" href="tel:+79154496350">+7 (915) 449-63-50</a>
+        </div>
         <div class="container px-5">
-            <div>
-                <a class="" href="mailto:remmoskv@yandex.ru">remmoskv@yandex.ru</a>
-                <img src="assets/icon.png" alt="ico" width="50">
-            </div>
-            <a class="navbar-brand" href="main.html">Remmoskv</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                 aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
@@ -36,7 +40,6 @@
                     <li class="nav-item"><a class="nav-link" href="portfolio.html">Ремонт</a></li>
                     <li class="nav-item"><a class="nav-link active disabled" href="about.html">О нас</a></li>
                     <li class="nav-item"><a class="nav-link" href="faq.html">FAQ</a></li>
-                    <li class="nav-item"><a class="nav-link" href="tel:+79154496350">+7 (915) 449-63-50</a></li>
                 </ul>
             </div>
         </div>
@@ -55,7 +58,7 @@
         </div>
     </header>
 
-    <!-- Features section-->
+    <!-- Info section-->
     <section class="py-5 border-bottom">
         <div class="container px-5 my-5">
             <div class="row gx-5">
@@ -77,7 +80,7 @@
         </div>
     </section>
     
-    <!-- Features section-->
+    <!-- Price section-->
     <section class="py-5 border-bottom">
         <div class="container px-5 my-5">
             <div class="row gx-5">
@@ -285,7 +288,7 @@
         </div>
     </section>
 
-    <!-- Features section-->
+    <!-- About section-->
     <section class="py-5 border-bottom" id="features">
         <div class="container px-5 my-5">
             <div class="row gx-5">
@@ -317,7 +320,7 @@
             </div>
         </div>
     </section>
-    <!-- Pricing section-->
+    <!-- Staff section-->
     <section class="bg-light py-5 border-bottom" id="services">
         <div class="container px-5 my-5">
             <div class="text-center mb-5">
@@ -380,7 +383,7 @@
         </div>
     </section>
 
-    <!-- Features section-->
+    <!-- Partners section-->
     <section class="py-5 border-bottom">
         <div class="container px-5 my-5">
             <div class="row gx-5">
@@ -405,7 +408,7 @@
         </div>
     </section>
 
-    <!-- Features section-->
+    <!-- Auto section-->
     <section class="py-5 border-bottom">
         <div class="container px-5 my-5">
             <div class="row gx-5">
@@ -453,7 +456,7 @@
                         <div class="form-floating mb-3">
                             <input th:field="${emailForm.email}" class="form-control" id="email" type="email" placeholder="Електронная почта"
                                    pattern="[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+" required />
-                            <label for="email">Ваша Електронная Почта</label>
+                            <label for="email">Email</label>
                         </div>
                         <!-- Phone number input-->
                         <div class="form-floating mb-3">
